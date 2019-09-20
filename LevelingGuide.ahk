@@ -140,7 +140,7 @@ Gosub, DrawZone
 Gosub, DrawTree
 Gosub, DrawNotes
 Gosub, DrawGuide
-GoSub, DrawExp
+;GoSub, DrawExp
 
 Gosub, HideAllWindows
 GoSub, ToggleLevelingGuide
@@ -562,7 +562,7 @@ return
 
 levelSelectUI:
   Gui, Level:Submit, NoHide
-  GoSub, setExp
+  ;GoSub, setExp
 return
 
 setNotes:
@@ -760,16 +760,16 @@ SearchAct:
   {
     oldLog := log
     trigger := false
-    levelUp := "is now level"
-    IfInString, log, %levelUp%
-    {
-      levelPos := InStr(log, levelUp, false)
-      newLevel := SubStr(log, levelPos+13, 2)
-      GuiControl,Level:,CurrentLevel, %newLevel%
-      If(level_toggle){
-        GoSub, setExp
-      }
-    }
+    ;levelUp := "is now level"
+    ;IfInString, log, %levelUp%
+    ;{
+    ;  levelPos := InStr(log, levelUp, false)
+    ;  newLevel := SubStr(log, levelPos+13, 2)
+    ;  GuiControl,Level:,CurrentLevel, %newLevel%
+    ;  If(level_toggle){
+    ;    GoSub, setExp
+    ;  }
+    ;}
     travel := "You have entered"
     IfInString, log, %travel%
     {
@@ -786,6 +786,13 @@ SearchAct:
           CurrentPart := "Part II"
           GuiControl, Controls:Choose, CurrentPart, % "|" CurrentPart
         }
+      }
+
+      newPartTest := "Aspirants' Plaza"
+      IfInString, log, %newPartTest%
+      {
+        newLevel := CurrentLevel + 1
+	GuiControl,Level:,CurrentLevel, %newLevel%
       }
 
       newAct := CurrentAct
@@ -972,7 +979,7 @@ ShowAllWindows:
 
   If (level_toggle) {
     Gui, Level:Show, NoActivate
-    GoSub, setExp
+    ;GoSub, setExp
   }
 
   If (tree_toggle) {
